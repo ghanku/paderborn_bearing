@@ -149,7 +149,7 @@ class Paderborn:
         self.vibration_sens = np.zeros((0,self.seq_len,1))
         y_64 = []
         indexer1 = 0
-        for index,i in tqdm(enumerate(self.empty_list,self.seq_len)):
+        for index,i in tqdm(enumerate(self.empty_list,self.seq_len), total=len(self.empty_list)):
             for j in i:
                 for i2 in j:
                     for i3 in i2:
