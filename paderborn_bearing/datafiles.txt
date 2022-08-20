@@ -9,6 +9,7 @@ Artificial OR KA03 http://groups.uni-paderborn.de/kat/BearingDataCenter/KA03.rar
 Artificial OR KA05 http://groups.uni-paderborn.de/kat/BearingDataCenter/KA05.rar
 Artificial OR KA06 http://groups.uni-paderborn.de/kat/BearingDataCenter/KA06.rar
 Artificial OR KA07 http://groups.uni-paderborn.de/kat/BearingDataCenter/KA07.rar
+Artificial OR KA08 http://groups.uni-paderborn.de/kat/BearingDataCenter/KA08.rar
 Artificial OR KA09 http://groups.uni-paderborn.de/kat/BearingDataCenter/KA09.rar
 Artificial IR KI01 http://groups.uni-paderborn.de/kat/BearingDataCenter/KI01.rar
 Artificial IR KI03 http://groups.uni-paderborn.de/kat/BearingDataCenter/KI03.rar
