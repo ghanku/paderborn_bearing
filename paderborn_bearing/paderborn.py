@@ -102,14 +102,14 @@ class Paderborn:
         self.empty_list = []
         file_name = []
         # Read .mat files based on the bearing element damage and the experiment name
-        for paths, dirs, files in os.walk(directory):
+        for paths, dirs, files in sorted(os.walk(directory)):
             if paths.endswith(bearing_element):
-                for paths, dirs, files in os.walk(paths):
+                for paths, dirs, files in sorted(os.walk(paths)):
                     for j in dirs:
                         y_divider += 1
                         # print(y_divider)
                         self.y_list.append(1)
-                    for i in files:
+                    for i in sorted(files):
                         if '.mat' in i:
                             mat_dict = loadmat(os.path.join(paths, i))
                             file = mat_dict[list(mat_dict.keys())[-1]]
