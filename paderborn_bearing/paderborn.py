@@ -17,7 +17,7 @@ start_time = time.time()
 
 
 class Paderborn:
-    def __init__(self, experiment, seq_len, sensor="Both", *bearing_element):
+    def __init__(self, experiment, seq_len, sensor="Both", working_condition="All",*bearing_element):
 
         if sensor not in ('Vibrational', 'Current', "Both"):
             print("wrong sensor name: {}".format(sensor))
@@ -26,6 +26,10 @@ class Paderborn:
         if experiment not in ('Artificial', 'Healthy', 'Real'):
             print("wrong experiment name: {}".format(experiment))
             sys.exit(1)
+        if working_condition not in ("All","N15_M07_F10", "N09_M07_F10", "N15_M01_F10", "N15_M07_F04"):
+            print("wrong working condition name: {}".format(working_condition))
+            sys.exit(1)
+            
         # print(bearing_element)
         for i in bearing_element:
             if i not in ('OR', 'IR', 'Normal'):
@@ -46,7 +50,7 @@ class Paderborn:
 
         self.seq_len = seq_len
         self.unpack_files(rdir, lines)
-        self.read_matfiles(rdir, experiment, bearing_element)
+        self.read_matfiles(rdir, experiment, bearing_element, working_condition)
         self.threshold_selector()
         self.data_divider(sensor)
 
@@ -95,7 +99,7 @@ class Paderborn:
                 list_files = subprocess.run(["unar", fpath])
             # Run a subprocess using homebrew combined with unar to unpack rar files downloaded from the Paderborn Bearing website.
 
-    def read_matfiles(self, directory, experiment, bearing_element):
+    def read_matfiles(self, directory, experiment, bearing_element, working_condition):
         y_divider = 0
         self.y_list = []
         directory = os.path.join(directory, experiment)
@@ -111,10 +115,15 @@ class Paderborn:
                         self.y_list.append(1)
                     for i in sorted(files):
                         if '.mat' in i:
+                            if (working_condition=="All"):
+                                pass
+                            else:
+                                if working_condition not in i:
+                                    continue
                             mat_dict = loadmat(os.path.join(paths, i))
                             file = mat_dict[list(mat_dict.keys())[-1]]
                             file_name.append(i)
-
+                            
                             for index, i in enumerate(file[0][0]):
                                 if index == 1:
                                     self.empty_list.append(i)
