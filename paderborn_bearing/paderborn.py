@@ -17,7 +17,7 @@ start_time = time.time()
 
 
 class Paderborn:
-    def __init__(self, experiment, seq_len, sensor="Both", working_condition="All",*bearing_element):
+    def __init__(self, experiment, seq_len, sensor="Both", working_condition="All", Code="Any",*bearing_element):
 
         if sensor not in ('Vibrational', 'Current', "Both"):
             print("wrong sensor name: {}".format(sensor))
@@ -29,12 +29,15 @@ class Paderborn:
         if working_condition not in ("All","N15_M07_F10", "N09_M07_F10", "N15_M01_F10", "N15_M07_F04"):
             print("wrong working condition name: {}".format(working_condition))
             sys.exit(1)
-            
+        if Code not in ('Any', 'KA03', 'KA05', 'KA06', 'KA07', 'KA09', 'KA01', 'KA08', 'KI05', 'KI08', 'KI07', 'KI01', 'KI03', 'K001', 'K002', 'K003', 'K004', 'K005', 'K006', 'KA04', 'KA15', 'KA16', 'KA22', 'KA30', 'KB27', 'KB23', 'KB24', 'KI04', 'KI14', 'KI16', 'KI17', 'KI21', 'KI18'):
+            print("wrong Code name: {}".format(Code))
+            sys.exit(1)
         # print(bearing_element)
         for i in bearing_element:
             if i not in ('OR', 'IR', 'Normal'):
                 print("wrong bearing element value: {}".format(bearing_element))
                 sys.exit(1)
+        
         # Root directory of all data and loading in text file
         rdir = os.path.join(os.path.expanduser('~'), 'Datasets/Paderborn')
         cur_path = os.path.dirname(__file__)
@@ -110,6 +113,11 @@ class Paderborn:
             if paths.endswith(bearing_element):
                 for paths, dirs, files in sorted(os.walk(paths)):
                     for j in dirs:
+                        if (Code == 'Any'):
+                            pass
+                        else:
+                            if Code not in j:
+                                continue
                         y_divider += 1
                         # print(y_divider)
                         self.y_list.append(1)
