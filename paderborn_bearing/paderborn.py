@@ -53,7 +53,7 @@ class Paderborn:
 
         self.seq_len = seq_len
         self.unpack_files(rdir, lines)
-        self.read_matfiles(rdir, experiment, bearing_element, working_condition)
+        self.read_matfiles(rdir, experiment, bearing_element, working_condition, Code)
         self.threshold_selector()
         self.data_divider(sensor)
 
@@ -102,7 +102,7 @@ class Paderborn:
                 list_files = subprocess.run(["unar", fpath])
             # Run a subprocess using homebrew combined with unar to unpack rar files downloaded from the Paderborn Bearing website.
 
-    def read_matfiles(self, directory, experiment, bearing_element, working_condition):
+    def read_matfiles(self, directory, experiment, bearing_element, working_condition, Code):
         y_divider = 0
         self.y_list = []
         directory = os.path.join(directory, experiment)
